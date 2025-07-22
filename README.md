@@ -29,9 +29,9 @@ Chatify is a **Django-based one-to-one chat application** that enables users to 
 
 ## 📸 Screenshots
 <img width="1918" height="919" alt="Screenshot 2025-07-23 004735" src="https://github.com/user-attachments/assets/2370d206-8217-45d9-a1b5-5ead58dfbd31" />
-<img width="1891" height="929" alt="Screenshot 2025-07-23 005020" src="https://github.com/user-attachments/assets/ce5564d7-9dbc-4f5b-9013-1e4b032ab895" />
 <img width="1896" height="912" alt="Screenshot 2025-07-23 004849" src="https://github.com/user-attachments/assets/b210d2c8-3c3b-4b5a-a3d4-0f13781643bc" />
-<img width="1918" height="919" alt="Screenshot 2025-07-23 004735" src="https://github.com/user-attachments/assets/1d0743ae-8350-483a-adba-2c4036d8aeb6" />
+<img width="1911" height="927" alt="Screenshot 2025-07-23 005040" src="https://github.com/user-attachments/assets/f5ebe4bd-b0e5-4b2c-85aa-b2a635dd6425" />
+<img width="1891" height="929" alt="Screenshot 2025-07-23 005020" src="https://github.com/user-attachments/assets/218f2fb5-b591-4324-8232-9a1e177fb6f4" />
 
 ---
 
