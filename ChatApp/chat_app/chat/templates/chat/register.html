@@ -1,0 +1,186 @@
+{% extends 'chat/base.html' %}
+{% block content %}
+<div class="auth-container d-flex align-items-center justify-content-center">
+    <div class="auth-card bg-dark rounded-4 shadow-lg overflow-hidden" style="width: 100%; max-width: 420px;">
+        <div class="auth-header p-4 text-center" style="background: linear-gradient(135deg, #5865F2 0%, #EB459E 100%);">
+            <h2 class="text-white mb-0 fw-bold">
+                <i class="fas fa-user-plus me-2"></i>Create Account
+            </h2>
+        </div>
+
+        <div class="auth-body p-4">
+            <form method="POST" class="needs-validation" novalidate>
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div class="mb-3">
+                    <label for="{{ field.id_for_label }}" class="form-label text-light">
+                        {{ field.label }}
+                        {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+                    </label>
+
+                    <div class="input-group">
+                        <span class="input-group-text bg-dark border-end-0">
+                            <i class="fas
+                                {% if field.name == 'username' %}fa-user
+                                {% elif field.name == 'email' %}fa-envelope
+                                {% elif 'password' in field.name %}fa-lock
+                                {% else %}fa-info-circle{% endif %}
+                            text-primary"></i>
+                        </span>
+                        {{ field }}
+                    </div>
+
+                    {% if field.help_text %}
+                    <small class="text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+
+                    {% for error in field.errors %}
+                    <div class="invalid-feedback d-block">
+                        {{ error }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary w-100 py-2 mb-3 fw-bold">
+                    <i class="fas fa-user-plus me-2"></i>Register
+                </button>
+
+                <div class="text-center mt-3">
+                    <p class="text-muted mb-2">Already have an account?</p>
+                    <a href="{% url 'login' %}" class="btn btn-outline-light w-100">
+                        <i class="fas fa-sign-in-alt me-2"></i>Login
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .auth-container {
+        min-height: calc(100vh - 60px);
+        background: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1470&auto=format&fit=crop') no-repeat center center;
+        background-size: cover;
+    }
+
+    .auth-card {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .form-control {
+        background-color: #1E1F22;
+        border-color: #383A40 !important;
+        color: white;
+    }
+
+    .form-control:focus {
+        background-color: #1E1F22;
+        color: white;
+        box-shadow: 0 0 0 0.25rem rgba(88, 101, 242, 0.25);
+    }
+
+    .input-group-text {
+        background-color: #1E1F22 !important;
+        border-color: #383A40 !important;
+        color: #B5BAC1 !important;
+    }
+
+    .btn-primary {
+        background-color: #5865F2;
+        border: none;
+        transition: all 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #4752C4;
+        transform: translateY(-2px);
+    }
+
+    .btn-outline-light {
+        transition: all 0.3s;
+    }
+
+    .btn-outline-light:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Password strength indicator */
+    .password-strength {
+        height: 4px;
+        background: #383A40;
+        margin-top: 5px;
+        border-radius: 2px;
+        overflow: hidden;
+    }
+
+    .password-strength-bar {
+        height: 100%;
+        width: 0;
+        transition: width 0.3s;
+    }
+</style>
+
+<script>
+    // Password strength indicator
+    document.addEventListener('DOMContentLoaded', function() {
+        const passwordFields = document.querySelectorAll('input[type="password"]');
+
+        passwordFields.forEach(field => {
+            field.addEventListener('input', function() {
+                const strengthBar = this.parentElement.querySelector('.password-strength-bar');
+                if (!strengthBar) return;
+
+                const strength = calculatePasswordStrength(this.value);
+                strengthBar.style.width = strength.percentage + '%';
+                strengthBar.style.backgroundColor = strength.color;
+            });
+        });
+
+        function calculatePasswordStrength(password) {
+            let strength = 0;
+
+            // Length check
+            if (password.length > 0) strength += 10;
+            if (password.length >= 8) strength += 20;
+
+            // Character variety
+            if (/[A-Z]/.test(password)) strength += 20;
+            if (/[0-9]/.test(password)) strength += 20;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 30;
+
+            // Cap at 100
+            strength = Math.min(strength, 100);
+
+            // Determine color
+            let color;
+            if (strength < 30) color = '#dc3545';
+            else if (strength < 70) color = '#fd7e14';
+            else color = '#28a745';
+
+            return { percentage: strength, color };
+        }
+    });
+
+    // Form validation
+    (function() {
+        'use strict';
+
+        const forms = document.querySelectorAll('.needs-validation');
+
+        Array.prototype.slice.call(forms).forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
+{% endblock %}

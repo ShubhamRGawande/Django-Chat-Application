@@ -1,0 +1,84 @@
+{% extends 'chat/base.html' %}
+{% block content %}
+<div class="home-container d-flex flex-column align-items-center justify-content-center text-center py-5">
+    <div class="home-content bg-dark p-5 rounded-4 shadow" style="max-width: 800px;">
+        <h1 class="display-4 fw-bold mb-4 gradient-text">Welcome to Chatify</h1>
+        <p class="lead mb-4">Connect with friends in real-time with our secure, modern chat application</p>
+
+        <div class="features mb-5">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card p-3 rounded-3 h-100">
+                        <i class="fas fa-comments fa-3x mb-3 text-primary"></i>
+                        <h4>Real-time Chat</h4>
+                        <p class="small">Instant messaging with WebSocket technology</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card p-3 rounded-3 h-100">
+                        <i class="fas fa-shield-alt fa-3x mb-3 text-primary"></i>
+                        <h4>Secure</h4>
+                        <p class="small">End-to-end encrypted conversations</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card p-3 rounded-3 h-100">
+                        <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+                        <h4>User Friendly</h4>
+                        <p class="small">Intuitive interface for all users</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-4 gap-3">
+                <i class="fas fa-sign-in-alt me-2"></i>Login
+            </a>
+            <a href="{% url 'register' %}" class="btn btn-outline-light btn-lg px-4">
+                <i class="fas fa-user-plus me-2"></i>Register
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .home-container {
+        min-height: calc(100vh - 60px);
+        background: linear-gradient(135deg, #1E1F22 0%, #2B2D31 100%);
+    }
+
+    .gradient-text {
+        background: linear-gradient(90deg, #5865F2, #EB459E);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .feature-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary {
+        background-color: #5865F2;
+        border-color: #5865F2;
+    }
+
+    .btn-primary:hover {
+        background-color: #4752C4;
+        border-color: #4752C4;
+    }
+
+    .btn-outline-light:hover {
+        color: #1E1F22;
+    }
+</style>
+{% endblock %}
